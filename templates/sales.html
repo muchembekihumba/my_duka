@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Sales - myDuka{% endblock %}
+{% block content %}
+    <h1>Sales</h1>
+    <p>Record and review all shop sales transactions.</p>
+    <a href="/sales/new">+ Record New Sale</a>
+    <table border="1" style="margin-top:16px; width:100%; border-collapse:collapse;">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Total (KSh)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="4">No sales recorded yet.</td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}

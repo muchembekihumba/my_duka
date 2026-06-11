@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Products - myDuka{% endblock %}
+{% block content %}
+    <h1>Products</h1>
+    <p>Manage the products available in your shop.</p>
+    <a href="/products/add">+ Add New Product</a>
+    <table border="1" style="margin-top:16px; width:100%; border-collapse:collapse;">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="4">No products found.</td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}

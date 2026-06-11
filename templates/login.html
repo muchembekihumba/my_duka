@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Login - myDuka{% endblock %}
+{% block content %}
+    <h1>Login</h1>
+    <p>Sign in to manage your shop.</p>
+    <form method="POST" action="/login">
+        <label for="username">Username</label><br>
+        <input type="text" id="username" name="username" placeholder="Enter your username" required><br><br>
+        <label for="password">Password</label><br>
+        <input type="password" id="password" name="password" placeholder="Enter your password" required><br><br>
+        <button type="submit">Login</button>
+    </form>
+    <p>Don't have an account? <a href="/register">Register here</a></p>
+{% endblock %}

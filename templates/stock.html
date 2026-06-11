@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Stock - myDuka{% endblock %}
+{% block content %}
+    <h1>Stock</h1>
+    <p>Track and update the inventory levels for all products.</p>
+    <a href="/stock/update">+ Update Stock</a>
+    <table border="1" style="margin-top:16px; width:100%; border-collapse:collapse;">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Last Updated</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="4">No stock records found.</td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}

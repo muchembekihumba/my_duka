@@ -1,22 +1,38 @@
 {% extends "base.html" %}
 {% block title %}Products - myDuka{% endblock %}
+
 {% block content %}
     <h1>Products</h1>
     <p>Manage the products available in your shop.</p>
-    <a href="/products/add">+ Add New Product</a>
-    <table border="1" style="margin-top:16px; width:100%; border-collapse:collapse;">
-        <thead>
+    <a href="/products/add" class="btn btn-primary mb-3">+ Add New Product</a>
+
+    <table id="productsTable" class="table table-bordered table-hover" style="width:100%">
+        <thead class="table-dark">
             <tr>
                 <th>ID</th>
                 <th>Name</th>
-                <th>Price</th>
-                <th>Actions</th>
+                <th>Buying Price (KSh)</th>
+                <th>Selling Price (KSh)</th>
             </tr>
         </thead>
         <tbody>
+            {% for product in products %}
             <tr>
-                <td colspan="4">No products found.</td>
+                <td>{{ product[0] }}</td>
+                <td>{{ product[1] }}</td>
+                <td>{{ product[2] }}</td>
+                <td>{{ product[3] }}</td>
             </tr>
+            {% endfor %}
         </tbody>
     </table>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        new DataTable('#productsTable', {
+            pageLength: 10,
+            order: [[0, 'asc']]
+        });
+    </script>
 {% endblock %}

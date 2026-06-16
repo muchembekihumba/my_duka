@@ -9,10 +9,16 @@ def insert_products(values):
     )
     conn.commit()
 
-def insert_sales(values):
+def create_transaction():
+    cur.execute("INSERT INTO transactions DEFAULT VALUES RETURNING id")
+    transaction_id = cur.fetchone()[0]
+    conn.commit()
+    return transaction_id
+
+def insert_sales(transaction_id, pid, quantity):
     cur.execute(
-        "INSERT INTO sales (pid, quantity) VALUES (%s, %s)",
-        values
+        "INSERT INTO sales (transaction_id, pid, quantity) VALUES (%s, %s, %s)",
+        (transaction_id, pid, quantity)
     )
     conn.commit()
 
@@ -31,8 +37,26 @@ def get_sales():
     cur.execute('select * from sales')
     return cur.fetchall()
 
+def get_sales_with_names():
+    cur.execute("""
+        SELECT t.id, p.name, s.quantity, t.created_at
+        FROM sales s
+        JOIN products p ON s.pid = p.id
+        JOIN transactions t ON s.transaction_id = t.id
+        ORDER BY t.id
+    """)
+    return cur.fetchall()
+
 def get_stock():
     cur.execute('select * from stock')
+    return cur.fetchall()
+
+def get_stock_with_names():
+    cur.execute("""
+        SELECT s.id, p.name, s.stock_quantity
+        FROM stock s
+        JOIN products p ON s.pid = p.id
+    """)
     return cur.fetchall()
 
 def sales_per_day():
@@ -75,10 +99,15 @@ def profit_per_product():
     """)
     return cur.fetchall()
 
-print(get_products())
-print(get_sales())
-print(get_stock())
-print(sales_per_day())
-print(profit_per_day())
-print(sales_per_product())
-print(profit_per_product())
+def insert_user(full_name, email, phone_number, password_hash):
+    cur.execute(
+        "INSERT INTO users (full_name, email, phone_number, password) VALUES (%s, %s, %s, %s)",
+        (full_name, email, phone_number, password_hash)
+    )
+    conn.commit()
+
+def get_user_by_email(email):
+    cur.execute("SELECT id, full_name, email FROM users WHERE email = %s", (email,))
+    return cur.fetchone()
+
+

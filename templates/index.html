@@ -3,8 +3,23 @@
 {% block content %}
     <h1>Welcome to myDuka</h1>
     <p>Your simple shop management system.</p>
+
+    {% if x > threshold %}
+        <div class="alert alert-success">Sales are high — KSh {{ x }} (above KSh {{ threshold }})</div>
+    {% elif x == threshold %}
+        <div class="alert alert-warning">Sales are at the threshold — KSh {{ x }}</div>
+    {% else %}
+        <div class="alert alert-danger">Sales are low — KSh {{ x }} (below KSh {{ threshold }})</div>
+    {% endif %}
+
+    {% if age % 2 == 0 %}
+        <div class="alert alert-info">{{ age }} is an even number.</div>
+    {% else %}
+        <div class="alert alert-warning">{{ age }} is an odd number.</div>
+    {% endif %}
+
     <p>
-        <a href="/login">Login</a> &nbsp;|&nbsp;
-        <a href="/register">Register</a>
+        <a href="/login" class="btn btn-primary">Login</a>
+        <a href="/register" class="btn btn-outline-secondary">Register</a>
     </p>
 {% endblock %}

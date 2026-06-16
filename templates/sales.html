@@ -3,20 +3,35 @@
 {% block content %}
     <h1>Sales</h1>
     <p>Record and review all shop sales transactions.</p>
-    <a href="/sales/new">+ Record New Sale</a>
-    <table border="1" style="margin-top:16px; width:100%; border-collapse:collapse;">
-        <thead>
+    <a href="/sales/new" class="btn btn-primary mb-3">+ Record New Sale</a>
+
+    <table id="salesTable" class="table table-bordered table-hover" style="width:100%">
+        <thead class="table-dark">
             <tr>
-                <th>Date</th>
-                <th>Product</th>
+                <th>Sale ID</th>
+                <th>Product Name</th>
                 <th>Quantity</th>
-                <th>Total (KSh)</th>
+                <th>Date</th>
             </tr>
         </thead>
         <tbody>
+            {% for sale in sales %}
             <tr>
-                <td colspan="4">No sales recorded yet.</td>
+                <td>{{ sale[0] }}</td>
+                <td>{{ sale[1] }}</td>
+                <td>{{ sale[2] }}</td>
+                <td>{{ sale[3] }}</td>
             </tr>
+            {% endfor %}
         </tbody>
     </table>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        new DataTable('#salesTable', {
+            pageLength: 10,
+            order: [[0, 'asc']]
+        });
+    </script>
 {% endblock %}
